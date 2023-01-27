@@ -6,5 +6,5 @@ import com.example.domain.Meal
 
 interface MealRemoteDataSource {
     suspend fun findRamdomMeal(): Either<Error, List<Meal>>
-    suspend fun findRecipeById(id: String): DetailMeal
+    suspend fun findRecipeById(id: String): Either<Error, DetailMeal>
 }

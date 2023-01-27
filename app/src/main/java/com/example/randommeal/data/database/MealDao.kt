@@ -26,6 +26,4 @@ interface MealDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMeals(meals: List<Meal>)
 
-    /*@Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertDetailMeal(meals: DetailMeal)*/
 }

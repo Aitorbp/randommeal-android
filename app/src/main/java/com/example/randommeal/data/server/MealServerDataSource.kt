@@ -21,8 +21,8 @@ class MealServerDataSource @Inject constructor(@ApiKey private val apiKey: Strin
             .toDomainModel()
 
     }
-    override suspend fun findRecipeById(id : String) : DetailMeal  {
-        return RemoteConnection.service
+    override suspend fun findRecipeById(id : String): Either<Error, DetailMeal> = tryCall {
+        RemoteConnection.service
             .getRecipeById(id, apiKey)
             .toDomainDetailModel()
     }

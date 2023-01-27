@@ -32,12 +32,12 @@ class MealsRepository @Inject constructor(
         return null
     }
 
-    suspend fun requestMealsById(id: String): DetailMeal {
-
+    suspend fun requestMealsById(id: String): DetailMeal? {
             val meals = remoteDataSource.findRecipeById(id)
-
-
-        return  meals
+            meals.fold(
+                        ifLeft = {return null },
+                        ifRight = {return it }
+                    )
     }
 
 
