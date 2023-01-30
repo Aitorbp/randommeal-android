@@ -35,6 +35,10 @@ class MealRoomDataSource @Inject constructor(private val mealDao: MealDao) :
         TODO("Not yet implemented")
     }
 
+    override suspend fun nukeTable() {
+        mealDao.nukeTable()
+    }
+
 }
 
 private fun List<DbMeal>.toDomainModel(): List<Meal> = map { it.toDomainModel() }

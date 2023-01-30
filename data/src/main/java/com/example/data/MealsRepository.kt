@@ -22,10 +22,18 @@ class MealsRepository @Inject constructor(
 
     suspend fun sizeMeal(): Int = localDataSource.size()
 
-    suspend fun requestRamdomMeals(): Error? {
-        if (localDataSource.isEmpty()) {
-            val meals = remoteDataSource.findRamdomMeal()
+    suspend fun requestRamdomMeals(meal: String): Error? {
+        if (localDataSource.isEmpty() || meal.isEmpty() || meal.isBlank() ) {
+            val meals = remoteDataSource.findRamdomMeal(meal)
             meals.fold(ifLeft = { return it }) {
+                localDataSource.nukeTable()
+                localDataSource.save(it)
+            }
+        }
+        else {
+            val meals = remoteDataSource.findRamdomMeal(meal)
+            meals.fold(ifLeft = { return it }) {
+                localDataSource.nukeTable()
                 localDataSource.save(it)
             }
         }
@@ -33,8 +41,8 @@ class MealsRepository @Inject constructor(
     }
 
     suspend fun requestMealsById(id: String): DetailMeal? {
-            val meals = remoteDataSource.findRecipeById(id)
-            meals.fold(
+            val meal = remoteDataSource.findRecipeById(id)
+            meal.fold(
                         ifLeft = {return null },
                         ifRight = {return it }
                     )

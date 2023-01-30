@@ -14,4 +14,5 @@ interface MealLocalDataSource {
     fun findByMeal(title: String): Flow<List<Meal>>
     suspend fun save(meals: List<Meal>): Error?
     suspend fun size(): Int
+    suspend fun nukeTable()
 }

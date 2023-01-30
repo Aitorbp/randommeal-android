@@ -14,9 +14,9 @@ class MealServerDataSource @Inject constructor(@ApiKey private val apiKey: Strin
     MealRemoteDataSource {
 
 
-    override suspend fun findRamdomMeal() : Either<Error, List<Meal>> = tryCall {
+    override suspend fun findRamdomMeal(meal: String) : Either<Error, List<Meal>> = tryCall {
         RemoteConnection.service
-            .listRamdomMeals("pasta", 20.toString(), apiKey)
+            .listRamdomMeals(meal, 20.toString(), apiKey)
             .results
             .toDomainModel()
 

@@ -51,6 +51,17 @@
 
 
 
+            <EditText
+                android:hint="@string/search"
+                android:id="@+id/search_button"
+                android:drawableRight="@drawable/ic_baseline_search_24"
+                android:singleLine="true"
+                android:maxLines="1"
+                android:layout_width="match_parent"
+                android:layout_height="50dp">
+
+            </EditText>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recycler"
                 android:layout_width="match_parent"

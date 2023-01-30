@@ -35,7 +35,14 @@ class MainViewModel @Inject constructor(getMealsUseCase: GetMealsUseCase,
     fun onUiReady() {
         CoroutineScope(Dispatchers.IO).launch {
             _state.value = _state.value.copy(loading = true)
-            val error = requestRandomMealsUseCase()
+            val error = requestRandomMealsUseCase("pasta")
+            _state.update { _state.value.copy(loading = false, error = error) }
+        }
+    }
+
+    fun filterMovie(filter: String?) {
+        CoroutineScope(Dispatchers.IO).launch {
+            val error = requestRandomMealsUseCase(filter.toString())
             _state.update { _state.value.copy(loading = false, error = error) }
         }
     }

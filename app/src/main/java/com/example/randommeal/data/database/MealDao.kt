@@ -4,8 +4,6 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-
-import com.example.randommeal.data.database.Meal
 import kotlinx.coroutines.flow.Flow
 
 @Dao
@@ -25,5 +23,8 @@ interface MealDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertMeals(meals: List<Meal>)
+
+    @Query("DELETE FROM Meal")
+    fun nukeTable()
 
 }
