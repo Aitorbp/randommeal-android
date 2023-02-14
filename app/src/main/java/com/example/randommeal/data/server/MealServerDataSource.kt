@@ -62,6 +62,7 @@ private fun RemoteDetailMealResult.toDomainDetailModel(): DetailMeal  =
  veryHealthy,
  veryPopular,
  weightWatcherSmartPoints,
+        false
     )
 
 private fun List<Result>.toDomainModel(): List<Meal> = map { it.toDomainModel() }
@@ -71,7 +72,8 @@ private fun Result.toDomainModel(): Meal  =
         id,
         image,
         imageType,
-        title
+        title,
+        false
     )
 
 

@@ -47,7 +47,8 @@ private fun DbMeal.toDomainModel(): Meal = Meal(
     id,
     image,
     imageType,
-    title)
+    title,
+    favorite)
 
 private fun List<Meal>.fromDomainModel(): List<DbMeal> = map { it.fromDomainModel() }
 
@@ -56,5 +57,6 @@ private fun Meal.fromDomainModel(): DbMeal = DbMeal (
     id,
     image,
     imageType,
-    title)
+    title,
+    favorite)
 

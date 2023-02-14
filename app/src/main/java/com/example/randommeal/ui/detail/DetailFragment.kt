@@ -24,8 +24,12 @@ class DetailFragment : Fragment(R.layout.fragment_detail) {
 
         binding.movieDetailToolbar.setNavigationOnClickListener { requireActivity().onBackPressed() }
 
+        binding.mealDetailFavorite.setOnClickListener { viewModel.onFavoriteClicked() }
+
         viewLifecycleOwner.launchAndCollect(viewModel.state) { state ->
-                binding.meal = state.meal
+            if(state.detailMeal != null) {
+                binding.mealDetail = state.detailMeal
+            }
         }
     }
 }

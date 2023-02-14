@@ -6,8 +6,10 @@
     <data>
         <import type="com.example.domain.DetailMeal"/>
         <variable
-            name="meal"
+            name="mealDetail"
             type="com.example.domain.DetailMeal" />
+
+
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -37,7 +39,7 @@
                     android:fitsSystemWindows="true"
                     android:scaleType="centerCrop"
                     app:layout_collapseMode="parallax"
-                    app:url="@{meal.image}"
+                    app:url="@{mealDetail.image}"
                     tools:src="@mipmap/ic_launcher" />
 
                 <androidx.appcompat.widget.Toolbar
@@ -45,7 +47,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
                     app:navigationIcon="@drawable/ic_arrow_back"
-                    app:title="@{meal.title}" />
+                    app:title="@{mealDetail.title}" />
 
             </com.google.android.material.appbar.CollapsingToolbarLayout>
 
@@ -69,7 +71,7 @@
                     android:layout_marginTop="16dp"
                     android:padding="16dp"
                     android:textStyle="bold"
-                    android:text="@{meal.title}"
+                    android:text="@{mealDetail.title}"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
 
                 <com.example.randommeal.ui.detail.MealDetailInfoView
@@ -80,12 +82,22 @@
                     android:lineSpacingMultiplier="1.5"
                     android:textAppearance="@style/TextAppearance.AppCompat.Medium"
                     android:background="?attr/colorSurface"
-                    app:meal="@{meal}"
+                    app:meal="@{mealDetail}"
                     tools:text="Lorem ipsum" />
 
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/meal_detail_favorite"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:src="@{mealDetail.favorite ? @drawable/ic_favorite_on : @drawable/ic_favorite_off}"
+            app:layout_anchor="@id/appBarLayout"
+            app:layout_anchorGravity="bottom|end"/>
+
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

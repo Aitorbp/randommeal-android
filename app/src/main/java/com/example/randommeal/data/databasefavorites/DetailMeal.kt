@@ -1,6 +1,16 @@
-package com.example.domain
+package com.example.randommeal.data.databasefavorites
 
+import android.os.Parcelable
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+
+import kotlinx.parcelize.Parcelize
+
+
+@Parcelize
+@Entity
 data class DetailMeal(
+    @PrimaryKey(autoGenerate = true) val idDDBB: Int,
     val aggregateLikes: Int,
     val cheap: Boolean,
     val cookingMinutes: Int,
@@ -30,4 +40,5 @@ data class DetailMeal(
     val veryPopular: Boolean,
     val weightWatcherSmartPoints: Int,
     val favorite: Boolean
-)
+) : Parcelable
+

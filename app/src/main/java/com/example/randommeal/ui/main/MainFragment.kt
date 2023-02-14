@@ -18,7 +18,7 @@ import com.example.randommeal.ui.common.textChanges
 import kotlinx.coroutines.flow.*
 
 @AndroidEntryPoint
-class MainFragment :  Fragment(R.layout.fragment_main) {
+class MainFragment :  Fragment(R.layout.fragment_main)  {
     private val viewModel: MainViewModel by viewModels()
 
     private lateinit var mainState: MainState
@@ -47,7 +47,11 @@ class MainFragment :  Fragment(R.layout.fragment_main) {
             .debounce(1500) // espere 1500ms sin eventos para emitir el valor
             .map { text -> text.toString() }
             .onEach { filter ->
-                viewModel.filterMovie(filter)
+                if(filter.isEmpty() || filter.isBlank()) {
+                    viewModel.filterMovie("Pasta")
+                } else {
+                    viewModel.filterMovie(filter)
+                }
             }// convertimos el CharSequence a String
             .distinctUntilChanged() // evitamos hacer búsquedas repetidas
             .launchIn(viewLifecycleOwner.lifecycleScope)
