@@ -24,7 +24,7 @@ class MainState(
     private val navController: NavController
 ) {
     fun onMovieClicked(movie: Meal) {
-        val action = MainFragmentDirections.actionMainToDetail(movie.id)
+        val action = MainFragmentDirections.actionMainToDetail(movie.id!!)
         navController.navigate(action)
     }
 

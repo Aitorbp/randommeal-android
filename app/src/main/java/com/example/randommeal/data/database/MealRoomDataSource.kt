@@ -2,7 +2,6 @@ package com.example.randommeal.data.database
 
 import com.example.data.datasource.MealLocalDataSource
 import com.example.domain.Meal
-import com.example.domain.DetailMeal
 import com.example.domain.Error
 import com.example.randommeal.tryCall
 import com.example.randommeal.data.database.Meal as DbMeal
@@ -48,15 +47,11 @@ private fun DbMeal.toDomainModel(): Meal = Meal(
     image,
     imageType,
     title,
-    favorite)
+    favorite,aggregateLikes, cheap, cookingMinutes, creditsText, dairyFree, gaps, glutenFree, healthScore, instructions, lowFodmap, preparationMinutes, pricePerServing, readyInMinutes, servings, sourceName, sourceUrl, spoonacularSourceUrl, summary, sustainable, vegan, vegetarian, veryHealthy, veryPopular, weightWatcherSmartPoints)
 
 private fun List<Meal>.fromDomainModel(): List<DbMeal> = map { it.fromDomainModel() }
 
 private fun Meal.fromDomainModel(): DbMeal = DbMeal (
-    id,
-    id,
-    image,
-    imageType,
-    title,
-    favorite)
+    id,id,image,imageType,title, favorite, aggregateLikes, cheap, cookingMinutes, creditsText, dairyFree, gaps, glutenFree, healthScore, instructions, lowFodmap, preparationMinutes, pricePerServing, readyInMinutes, servings, sourceName, sourceUrl, spoonacularSourceUrl, summary, sustainable, vegan, vegetarian, veryHealthy, veryPopular, weightWatcherSmartPoints
+)
 

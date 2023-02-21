@@ -18,6 +18,6 @@ interface RemoteService {
         suspend fun getRecipeById(
         @Path("id") searchById:String,
         @Query("apiKey") apiKey: String,
-        ): RemoteDetailMealResult
+        ): Result
 
 }

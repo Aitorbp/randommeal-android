@@ -3,7 +3,7 @@ package com.example.randommeal.ui.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.DetailMeal
+import com.example.domain.Meal
 import com.example.domain.Error
 
 import com.example.usecases.FindMealByIdUseCase
@@ -36,17 +36,16 @@ class DetailViewModel @Inject constructor(
         }
     }
 
-    fun onFavoriteClicked() = runBlocking<Unit> {
-        CoroutineScope(Dispatchers.IO).launch {
-
+    fun onFavoriteClicked() {
+        viewModelScope.launch {
             _state.value.detailMeal?.let { meal ->
                 val error = switchMealFavoriteUseCase(meal)
-            _state.update { it.copy(error = error) }
-                }
+                _state.update { it.copy(error = error) }
+            }
         }
     }
 
 
 
-    data class UiState(val detailMeal: DetailMeal? = null, val error: Error? = null )
+    data class UiState(val detailMeal: Meal? = null, val error: Error? = null )
 }

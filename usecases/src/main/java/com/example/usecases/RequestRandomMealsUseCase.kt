@@ -8,6 +8,6 @@ import javax.inject.Inject
 class RequestRandomMealsUseCase @Inject constructor (private val repository: MealsRepository) {
 
     suspend operator fun invoke(meal: String) : Error? {
-        return repository.requestRamdomMeals(meal)
+        return repository.requestRandomMeals(meal)
     }
 }

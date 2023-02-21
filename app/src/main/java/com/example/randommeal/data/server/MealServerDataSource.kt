@@ -21,59 +21,19 @@ class MealServerDataSource @Inject constructor(@ApiKey private val apiKey: Strin
             .toDomainModel()
 
     }
-    override suspend fun findRecipeById(id : String): Either<Error, DetailMeal> = tryCall {
+    override suspend fun findRecipeById(id : String): Either<Error, Meal> = tryCall {
         RemoteConnection.service
             .getRecipeById(id, apiKey)
-            .toDomainDetailModel()
+            .toDomainModel()
     }
 }
 
-
-
-private fun List<RemoteDetailMealResult>.toDomainDetailModel(): List<DetailMeal> = map {it.toDomainDetailModel()}
-
-private fun RemoteDetailMealResult.toDomainDetailModel(): DetailMeal  =
-    DetailMeal(
- aggregateLikes,
- cheap,
- cookingMinutes,
- creditsText,
- dairyFree,
- gaps,
- glutenFree,
- healthScore,
- id ,
- image,
- imageType,
- instructions  ,
- lowFodmap,
- preparationMinutes,
- pricePerServing,
- readyInMinutes,
- servings,
- sourceName,
- sourceUrl,
- spoonacularSourceUrl,
- summary,
- sustainable,
- title,
- vegan,
- vegetarian ,
- veryHealthy,
- veryPopular,
- weightWatcherSmartPoints,
-        false
-    )
 
 private fun List<Result>.toDomainModel(): List<Meal> = map { it.toDomainModel() }
 
 private fun Result.toDomainModel(): Meal  =
     Meal(
-        id,
-        image,
-        imageType,
-        title,
-        false
+        id,image,imageType, title,favorite, aggregateLikes, cheap, cookingMinutes, creditsText, dairyFree, gaps, glutenFree, healthScore, instructions, lowFodmap, preparationMinutes, pricePerServing, readyInMinutes, servings, sourceName, sourceUrl, spoonacularSourceUrl, summary, sustainable, vegan, vegetarian, veryHealthy, veryPopular, weightWatcherSmartPoints
     )
 
 

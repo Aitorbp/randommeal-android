@@ -5,5 +5,5 @@ import javax.inject.Inject
 
 class GetMealsUseCase @Inject constructor(private val repository: MealsRepository) {
 
-    operator fun invoke() = repository.ramdomMeals
+    operator fun invoke() = repository.randomMeals
 }

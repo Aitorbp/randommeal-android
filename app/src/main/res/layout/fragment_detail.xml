@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-        <import type="com.example.domain.DetailMeal"/>
+        <import type="com.example.domain.Meal"/>
         <variable
             name="mealDetail"
-            type="com.example.domain.DetailMeal" />
+            type="com.example.domain.Meal" />
 
 
     </data>

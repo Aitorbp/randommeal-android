@@ -1,9 +1,7 @@
 package com.example.data
 
-import com.example.data.datasource.MealFavoriteLocalDataSource
 import com.example.data.datasource.MealLocalDataSource
 import com.example.data.datasource.MealRemoteDataSource
-import com.example.domain.DetailMeal
 import com.example.domain.Meal
 import com.example.domain.Error
 import kotlinx.coroutines.flow.Flow
@@ -11,13 +9,12 @@ import javax.inject.Inject
 
 class MealsRepository @Inject constructor(
     private val localDataSource : MealLocalDataSource,
-    private val remoteDataSource : MealRemoteDataSource,
-    private val localFavoritesDataSource: MealFavoriteLocalDataSource
+    private val remoteDataSource : MealRemoteDataSource
 ) {
 
-    val ramdomMeals = localDataSource.meals
+    val randomMeals = localDataSource.meals
 
-    val favoritesMeals = localFavoritesDataSource.mealsFavorite
+
 
     fun findById(id: Int): Flow<Meal> = localDataSource.findById(id)
 
@@ -25,7 +22,7 @@ class MealsRepository @Inject constructor(
 
     suspend fun sizeMeal(): Int = localDataSource.size()
 
-    suspend fun requestRamdomMeals(meal: String): Error? {
+    suspend fun requestRandomMeals(meal: String): Error? {
         if (localDataSource.isEmpty() || meal.isEmpty() || meal.isBlank() ) {
             val meals = remoteDataSource.findRamdomMeal(meal)
             meals.fold(ifLeft = { return it }) {
@@ -43,20 +40,19 @@ class MealsRepository @Inject constructor(
         return null
     }
 
-    suspend fun requestMealsById(id: String): DetailMeal? {
+    suspend fun requestMealsById(id: String): Meal? {
             val meal = remoteDataSource.findRecipeById(id)
-            meal.fold(
-                        ifLeft = {return null },
-                        ifRight = {return it }
+             return meal.fold(
+                        ifLeft = { null },
+                        ifRight = { it }
                     )
     }
 
 
 
-    suspend fun switchFavoriteMeal(meal: DetailMeal): Error? {
-
-            val updatedMeal = meal.copy(favorite = !meal.favorite)
-            val ramdomMeals = localFavoritesDataSource.mealsFavorite
-            return localFavoritesDataSource.saveFavorites(listOf(updatedMeal))
+    suspend fun switchFavoriteMeal(meal: Meal): Error? {
+            val updatedMeal = meal.copy(favorite = !meal.favorite!!)
+           // val randomMeals = remoteDataSource.meals
+            return localDataSource.save(listOf(updatedMeal))
     }
 }
